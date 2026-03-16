@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>E-Maitri - Digital Gram Swaraj</title>
+    <link rel="icon" href="data:,">
+    <!-- Modern Hindi & English Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Background Image Layer -->
+    <div class="background-layer"></div>
+
+    <!-- Main Mobile Container -->
+    <main class="mobile-container">
+        <!-- Top Header: Language Toggle -->
+        <header class="top-header">
+            <div class="lang-toggle-container glass-effect">
+                <button class="lang-btn active" id="btn-hi">हिंदी</button>
+                <div class="divider"></div>
+                <button class="lang-btn" id="btn-en">ENG</button>
+            </div>
+        </header>
+
+        <!-- Main Glass Card -->
+        <section class="main-glass-card glass-effect animate-up">
+
+            <!-- Branding Section -->
+            <div class="brand-header">
+                <img src="assets/logo.png" alt="E-Maitri Logo" class="brand-logo shadow-img">
+                <div class="brand-text">
+                    <h1 class="brand-title" data-i18n="brand-title">ई-मैत्री</h1>
+                    <p class="brand-subtitle" data-i18n="brand-subtitle">E-MAITRI: डिजिटल ग्राम स्वराज</p>
+                </div>
+            </div>
+
+            <!-- Greeting Section -->
+            <div class="greeting-box glass-effect-light">
+                <p class="greeting-subtitle" data-i18n="greeting-subtitle">ई-मैत्री पोर्टल में आपका स्वागत है।</p>
+
+                <!-- Login Button -->
+                <button class="primary-btn pulse-anim">
+                    <i class="fa-solid fa-arrow-right-to-bracket login-icon"></i>
+                    <span data-i18n="login-text">पोर्टल में प्रवेश करें</span>
+                </button>
+            </div>
+
+            <!-- Quote/Info Box -->
+            <div class="quote-box glass-effect-light">
+                <p class="quote-text" data-i18n="quote-text">"महाभारत नहीं, अब केवल मैत्री।"</p>
+                <p class="quote-subtext" data-i18n="quote-subtext">आपका डेटा Google Cloud और Firebase की विश्व स्तरीय
+                    सुरक्षा में सुरक्षित है।</p>
+            </div>
+
+            <!-- Features Grid (3 Columns) -->
+            <div class="features-grid">
+                <!-- Card 1 -->
+                <div class="feature-card saffron-card hover-lift">
+                    <div class="feature-icon-wrapper">
+                        <i class="fa-solid fa-handshake-angle feature-icon"></i>
+                    </div>
+                    <h3 class="feature-title" data-i18n="feature-1-title">मैत्रीतंत्र रक्षण</h3>
+                    <p class="feature-desc" data-i18n="feature-1-desc">ग्राम स्वराज पर आधारित सामाजिक ढांचा </p>
+                </div>
+                <!-- Card 2 -->
+                <div class="feature-card green-card hover-lift">
+                    <div class="feature-icon-wrapper">
+                        <i class="fa-solid fa-laptop-file feature-icon"></i>
+                    </div>
+                    <h3 class="feature-title" data-i18n="feature-2-title">डिजिटल सेवाएँ</h3>
+                    <p class="feature-desc" data-i18n="feature-2-desc">ई-श्रम, आयुष्मान, सरकारी काम</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="feature-card teal-card hover-lift">
+                    <div class="feature-icon-wrapper">
+                        <i class="fa-solid fa-users-rays feature-icon"></i>
+                    </div>
+                    <h3 class="feature-title" data-i18n="feature-3-title">लोक-मित्र सहायता</h3>
+                    <p class="feature-desc" data-i18n="feature-3-desc">स्थानीय विकास और सामुदायिक प्रबंधन</p>
+                </div>
+            </div>
+
+            <!-- Bottom Links -->
+            <div class="bottom-links">
+                <button class="link-btn glass-effect-light hover-lift" data-i18n="link-about">About Us (हमारे बारे
+                    में)</button>
+                <button class="link-btn glass-effect-light hover-lift" data-i18n="link-terms">Terms & Conditions (नियम
+                    शर्तें)</button>
+            </div>
+
+        </section>
+
+        <!-- Bottom Logos -->
+        <div class="bottom-logos">
+            <!-- Placeholder for a secondary floating logo if needed, based on reference we have one right center and bottom right -->
+        </div>
+
+    </main>
+
+    <!-- Floating Accents -->
+    <div class="floating-logo-mid right-float heartbeat">
+        <img src="assets/lokmitra.png" alt="Lok Mitra Small Logo" class="mid-logo-img">
+    </div>
+    <div class="floating-logo-bottom right-float animate-up-delayed">
+        <h2 class="bottom-brand-text">Lok<br>Mitra</h2>
+    </div>
+
+    <!-- Overlay light burst effect (implied by image bottom right) -->
+    <div class="light-burst"></div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
