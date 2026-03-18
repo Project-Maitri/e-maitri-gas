@@ -14,6 +14,21 @@ const htmlContent = fs.readFileSync(path.join(srcDir, 'index.html'), 'utf8');
 const cssContent = fs.readFileSync(path.join(srcDir, 'style.css'), 'utf8');
 const jsContent = fs.readFileSync(path.join(srcDir, 'script.js'), 'utf8');
 
+// Function to get Base64 representation of an image
+function getBase64Image(fileName) {
+  try {
+    const filePath = path.join(srcDir, 'assets', fileName);
+    if (fs.existsSync(filePath)) {
+      const bitmap = fs.readFileSync(filePath);
+      const ext = path.extname(fileName).substring(1);
+      return `data:image/${ext};base64,${bitmap.toString('base64')}`;
+    }
+  } catch(e) {
+    console.warn(`Could not encode ${fileName}: ${e.message}`);
+  }
+  return null;
+}
+
 // Inject CSS and JS into HTML
 let finalHtml = htmlContent;
 
@@ -29,6 +44,12 @@ finalHtml = finalHtml.replace(
   `<script>\n${jsContent}\n</script>`
 );
 
+// Replace all image references with Base64 data
+finalHtml = finalHtml.replace(/(?:\.\/)?assets\/([a-zA-Z0-9_-]+\.(?:png|jpg|jpeg|svg|gif))/g, (match, fileName) => {
+  const base64 = getBase64Image(fileName);
+  return base64 || match;
+});
+
 // Write to dist folder
 fs.writeFileSync(path.join(distDir, 'index.html'), finalHtml);
-console.log('Build successful! Inlined style.css and script.js into dist/index.html');
+console.log('Build successful! Inlined style.css, script.js, and converted images to Base64.');
