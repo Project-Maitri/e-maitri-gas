@@ -26,13 +26,18 @@ jobs:
 
       - name: Create ~/.clasprc.json
         run: |
-          echo '${{ secrets.CLASPRC_JSON }}' > ~/.clasprc.json
-
-      - name: Create ~/.clasprc.json
-        run: |
           cat <<EOF > ~/.clasprc.json
           ${{ secrets.CLASPRC_JSON }}
           EOF
 
+      - name: Create .clasp.json
+        run: |
+          echo '{"scriptId":"${{ secrets.SCRIPT_ID }}","rootDir":"dist"}' > .clasp.json
+
       - name: Push to Apps Script
         run: clasp push --force
+
+      - name: Deploy to Existing Web App
+        run: |
+          # यहाँ -i फ्लैग आपकी पुरानी ID को ही नए कोड से अपडेट कर देगा
+          clasp deploy -i ${{ secrets.DEPLOYMENT_ID }} --description "Updated via GitHub Actions: $(date +'%Y-%m-%d %H:%M')"
