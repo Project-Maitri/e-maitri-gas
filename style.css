@@ -374,20 +374,46 @@ body {
 /* Bottom Links */
 .bottom-links {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: 8px;
+    justify-content: space-between;
+    align-items: stretch;
 }
 
 .link-btn {
     border: none;
     border-radius: 12px;
-    padding: 10px;
-    font-family: var(--font-en);
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--color-text-dark);
+    padding: 12px 5px;
     cursor: pointer;
+    transition: var(--transition-medium);
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-width: 0;
+    text-decoration: none;
+}
+
+.footer-icon {
+    font-size: 1.4rem;
     transition: var(--transition-fast);
+}
+
+.about-icon {
+    color: var(--color-teal);
+}
+
+.terms-icon {
+    color: var(--color-saffron);
+}
+
+.privacy-icon {
+    color: var(--color-green);
+}
+
+.link-btn:hover .footer-icon {
+    transform: scale(1.2);
 }
 
 .link-btn:hover {
@@ -412,6 +438,7 @@ body {
     align-items: center;
     box-shadow: 0 4px 20px rgba(0,0,0,0.15);
     z-index: 10;
+    cursor: pointer;
 }
 
 .mid-logo-img {
@@ -434,6 +461,7 @@ body {
     box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
     z-index: 5;
     text-align: center;
+    cursor: pointer;
 }
 
 .bottom-brand-text {
@@ -456,6 +484,79 @@ body {
     pointer-events: none;
     z-index: 1;
     mix-blend-mode: screen;
+}
+
+.modern-btn-container {
+    display: flex;
+    justify-content: center;
+    padding: 3rem 0;
+    width: 100%;
+    margin-top: -3.5rem; /* Space refinement */
+    position: relative;
+    z-index: 2;
+}
+
+.modern-portal-btn {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 60px;
+    padding: 10px 45px 10px 12px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    color: white;
+    font-family: var(--font-hindi);
+    font-size: 1.5rem;
+    font-weight: 800;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2), inset 0 0 15px rgba(255, 255, 255, 0.1);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.modern-icon-box {
+    background: linear-gradient(135deg, var(--color-green), #00d2ff);
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    color: white;
+    box-shadow: 0 0 15px var(--color-green);
+    border: 2px solid rgba(255, 255, 255, 0.6);
+}
+
+.modern-portal-btn:hover {
+    transform: translateY(-8px) scale(1.05);
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 30px rgba(0, 210, 255, 0.4);
+}
+
+.btn-glow-trace {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.modern-portal-btn:hover .btn-glow-trace {
+    opacity: 1;
+}
+
+.modern-portal-btn span {
+    position: relative;
+    z-index: 1;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
 }
 
 /* =========================================

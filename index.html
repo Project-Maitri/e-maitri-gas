@@ -93,28 +93,48 @@
 
             <!-- Bottom Links -->
             <div class="bottom-links">
-                <button class="link-btn glass-effect-light hover-lift" data-i18n="link-about">About Us (हमारे बारे
-                    में)</button>
-                <button class="link-btn glass-effect-light hover-lift" data-i18n="link-terms">Terms & Conditions (नियम
-                    शर्तें)</button>
+                <a href="about.html" class="link-btn glass-effect-light hover-lift" title="About Us" aria-label="About Us">
+                    <i class="fa-solid fa-circle-info footer-icon about-icon"></i>
+                </a>
+                <a href="terms.html" class="link-btn glass-effect-light hover-lift" title="Terms & Conditions" aria-label="Terms & Conditions">
+                    <i class="fa-solid fa-file-contract footer-icon terms-icon"></i>
+                </a>
+                <a href="privacy.html" class="link-btn glass-effect-light hover-lift" title="Privacy Policy" aria-label="Privacy Policy">
+                    <i class="fa-solid fa-shield-halved footer-icon privacy-icon"></i>
+                </a>
             </div>
 
         </section>
 
+        <!-- Modern Portal Button Section -->
+        <div class="modern-btn-container">
+            <button class="modern-portal-btn pulse-anim">
+                <div class="modern-icon-box">
+                    <i class="fa-solid fa-fingerprint"></i>
+                </div>
+                <span data-i18n="login-text">पोर्टल में प्रवेश करें</span>
+                <div class="btn-glow-trace"></div>
+            </button>
+        </div>
+
         <!-- Bottom Logos -->
         <div class="bottom-logos">
-            <!-- Placeholder for a secondary floating logo if needed, based on reference we have one right center and bottom right -->
+            <!-- Placeholder for secondary floating logos -->
         </div>
 
     </main>
 
     <!-- Floating Accents -->
-    <div class="floating-logo-mid right-float heartbeat">
-        <img src="assets/lokmitra.png" alt="Lok Mitra Small Logo" class="mid-logo-img">
-    </div>
-    <div class="floating-logo-bottom right-float animate-up-delayed">
-        <h2 class="bottom-brand-text">Lok<br>Mitra</h2>
-    </div>
+    <a href="https://gemini.google.com" target="_blank" rel="noopener noreferrer" style="text-decoration: none;">
+        <div class="floating-logo-mid right-float heartbeat">
+            <img src="assets/lokmitra.png" alt="Lok Mitra Small Logo" class="mid-logo-img">
+        </div>
+    </a>
+    <a href="https://gemini.google.com" target="_blank" rel="noopener noreferrer" style="text-decoration: none;">
+        <div class="floating-logo-bottom right-float animate-up-delayed">
+            <h2 class="bottom-brand-text">Lok<br>Mitra</h2>
+        </div>
+    </a>
 
     <!-- Overlay light burst effect (implied by image bottom right) -->
     <div class="light-burst"></div>

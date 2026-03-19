@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>About Us - E-Maitri</title>
+    <link rel="icon" href="data:,">
+    <!-- Modern Hindi & English Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Background Image Layer -->
+    <div class="background-layer"></div>
+
+    <!-- Main Mobile Container -->
+    <main class="mobile-container">
+        <!-- Top Header: Back Button & Language Toggle -->
+        <header class="top-header" style="justify-content: space-between; padding: 1rem 2rem;">
+            <a href="index.html" class="glass-effect-light hover-lift" style="padding: 8px 15px; border-radius: 20px; text-decoration: none; color: var(--color-text-dark); font-weight: 600; display: flex; align-items: center; gap: 8px;">
+                <i class="fa-solid fa-arrow-left"></i> <span data-i18n="back-btn">Back</span>
+            </a>
+            <div class="lang-toggle-container glass-effect">
+                <button class="lang-btn active" id="btn-hi">हिंदी</button>
+                <div class="divider"></div>
+                <button class="lang-btn" id="btn-en">ENG</button>
+            </div>
+        </header>
+
+        <!-- Main Glass Card -->
+        <section class="main-glass-card glass-effect animate-up">
+            <h1 class="brand-title" style="text-align: center; margin-bottom: 1rem;" data-i18n="about-title">हमारे बारे में (About Us)</h1>
+            
+            <div class="greeting-box glass-effect-light" style="text-align: left; padding: 1.5rem;">
+                <p class="quote-text" data-i18n="about-intro">ई-मैत्री: डिजिटल ग्राम स्वराज की ओर एक कदम।</p>
+                <p class="brand-subtitle" style="margin-bottom: 1rem; color: var(--color-blue-dark);" data-i18n="about-mission">Our Mission: empowering rural communities with digital tools.</p>
+                
+                <div style="font-size: 0.9rem; line-height: 1.6; color: var(--color-text-medium);">
+                    <p data-i18n="about-p1">E-Maitri is a platform dedicated to bringing digital sovereignty to every village. We believe in the power of local governance and community-led development.</p>
+                    <br>
+                    <p data-i18n="about-p2">Our services bridge the gap between government schemes and the common citizen, ensuring that benefits reach those who need them most through our dedicated 'Lok Mitras'.</p>
+                </div>
+            </div>
+
+            <div class="features-grid" style="grid-template-columns: 1fr; gap: 15px;">
+                <div class="feature-card saffron-card">
+                    <h3 class="feature-title">Vision (दृष्टिकोण)</h3>
+                    <p class="feature-desc">To create a transparent and efficient local governance ecosystem.</p>
+                </div>
+                <div class="feature-card green-card">
+                    <h3 class="feature-title">Values (मूल्य)</h3>
+                    <p class="feature-desc">Trust, Transparency, and Community Empowerment.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
