@@ -113,4 +113,11 @@ document.addEventListener('DOMContentLoaded', () => {
             card.style.background = ''; 
         });
     });
+
 });
+
+// Maitri Chatbot Widget Toggle (global scope for onclick attribute)
+function toggleMaitriChat() {
+    var win = document.getElementById("maitri-chat-window");
+    win.style.display = (win.style.display === "none") ? "block" : "none";
+}

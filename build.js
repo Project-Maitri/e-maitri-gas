@@ -9,10 +9,17 @@ if (!fs.existsSync(distDir)) {
   fs.mkdirSync(distDir);
 }
 
-// Read source files
-const htmlContent = fs.readFileSync(path.join(srcDir, 'index.html'), 'utf8');
+// Read shared source files
 const cssContent = fs.readFileSync(path.join(srcDir, 'style.css'), 'utf8');
 const jsContent = fs.readFileSync(path.join(srcDir, 'script.js'), 'utf8');
+
+// Pages to build: [source file, dist output name]
+const pages = [
+  ['index.html',   'index.html'],
+  ['about.html',   'about.html'],
+  ['privacy.html', 'privacy.html'],
+  ['terms.html',   'terms.html'],
+];
 
 // Function to get Base64 representation of an image
 function getBase64Image(fileName) {
@@ -29,27 +36,40 @@ function getBase64Image(fileName) {
   return null;
 }
 
-// Inject CSS and JS into HTML
-let finalHtml = htmlContent;
+// Process each page
+pages.forEach(([srcFile, distFile]) => {
+  const srcPath = path.join(srcDir, srcFile);
+  if (!fs.existsSync(srcPath)) {
+    console.warn(`Skipping ${srcFile} – file not found.`);
+    return;
+  }
 
-// Check if <link rel="stylesheet" href="style.css"> exists and replace it
-finalHtml = finalHtml.replace(
-  /<link\s+rel="stylesheet"\s+href="style\.css">/g,
-  `<style>\n${cssContent}\n</style>`
-);
+  let html = fs.readFileSync(srcPath, 'utf8');
 
-// Check if <script src="script.js"></script> exists and replace it
-finalHtml = finalHtml.replace(
-  /<script\s+src="script\.js"><\/script>/g,
-  `<script>\n${jsContent}\n</script>`
-);
+  // Inline style.css
+  html = html.replace(
+    /<link\s+rel="stylesheet"\s+href="style\.css">/g,
+    `<style>\n${cssContent}\n</style>`
+  );
 
-// Replace all image references with Base64 data
-finalHtml = finalHtml.replace(/(?:\.\/)?assets\/([a-zA-Z0-9_-]+\.(?:png|jpg|jpeg|svg|gif))/g, (match, fileName) => {
-  const base64 = getBase64Image(fileName);
-  return base64 || match;
+  // Inline script.js (only present in index.html, safe to run on all)
+  html = html.replace(
+    /<script\s+src="script\.js"><\/script>/g,
+    `<script>\n${jsContent}\n</script>`
+  );
+
+  // Replace asset image references with Base64 data
+  html = html.replace(/(?:\.\/)?assets\/([a-zA-Z0-9_-]+\.(?:png|jpg|jpeg|svg|gif))/g, (match, fileName) => {
+    const base64 = getBase64Image(fileName);
+    return base64 || match;
+  });
+
+  // Fix internal page links: about.html -> ?page=about etc.
+  html = html.replace(/href="(about|privacy|terms)\.html"/g, 'href="?page=$1"');
+
+  fs.writeFileSync(path.join(distDir, distFile), html);
+  console.log(`✓ Built ${distFile}`);
 });
 
-// Write to dist folder
-fs.writeFileSync(path.join(distDir, 'index.html'), finalHtml);
-console.log('Build successful! Inlined style.css, script.js, and converted images to Base64.');
+console.log('\nBuild complete! All pages inlined and ready for Apps Script deployment.');
+
