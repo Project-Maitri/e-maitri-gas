@@ -64,8 +64,11 @@ pages.forEach(([srcFile, distFile]) => {
     return base64 || match;
   });
 
-  // Fix internal page links: about.html -> ?page=about etc.
+  // Fix forward links: about.html -> ?page=about, privacy.html -> ?page=privacy, terms.html -> ?page=terms
   html = html.replace(/href="(about|privacy|terms)\.html"/g, 'href="?page=$1"');
+
+  // Fix back links to home: index.html -> . (Apps Script root URL)
+  html = html.replace(/href="index\.html"/g, 'href="."');
 
   fs.writeFileSync(path.join(distDir, distFile), html);
   console.log(`✓ Built ${distFile}`);
