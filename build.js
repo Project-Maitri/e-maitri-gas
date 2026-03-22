@@ -1,6 +1,10 @@
 const fs = require('fs');
 const path = require('path');
 
+// ⚠️ Google Apps Script deployment base URL
+// Update this if the deployment URL ever changes.
+const GAS_BASE_URL = 'https://script.google.com/macros/s/AKfycbz8n3JH3ijk1imgyBxMA87Uufb6FXcqsXoMSlc1MkX9jZhMjy5TtSI6KyNfAsGqmlHG/exec';
+
 const srcDir = __dirname;
 const distDir = path.join(__dirname, 'dist');
 
@@ -64,19 +68,25 @@ pages.forEach(([srcFile, distFile]) => {
     return base64 || match;
   });
 
-  // GAS runs inside a sandboxed iframe — convert all internal <a href> to onclick JS navigation
-  // This is the ONLY reliable way to navigate in Google Apps Script web apps.
+  // GAS iframe cross-origin navigation fix:
+  // JS window.top.location is BLOCKED (cross-origin: googleusercontent.com vs script.google.com)
+  // Solution: use native <a href target="_top"> — browsers allow this even cross-origin.
 
-  // Forward links: about.html / privacy.html / terms.html -> JS navigation with ?page=X
+  // Forward links: about.html / privacy.html / terms.html -> full GAS URL with ?page=X
   html = html.replace(
     /href="(about|privacy|terms)\.html"/g,
-    (_, page) => `href="#" onclick="window.top.location.href=window.top.location.href.split('?')[0]+'?page=${page}';return false;"`
+    (_, page) => `href="${GAS_BASE_URL}?page=${page}" target="_top"`
   );
 
-  // Back links: index.html -> JS navigation to root exec URL (strips any ?page= param)
+  // Back links to home: index.html / . -> GAS root exec URL
+  html = html.replace(
+    /href="(index\.html|\.|#)" onclick="[^"]*"/g,
+    `href="${GAS_BASE_URL}" target="_top"`
+  );
+  // Also catch plain href="index.html" or href="." with no onclick
   html = html.replace(
     /href="(index\.html|\.)"/g,
-    `href="#" onclick="window.top.location.href=window.top.location.href.split('?')[0];return false;"`
+    `href="${GAS_BASE_URL}" target="_top"`
   );
 
   fs.writeFileSync(path.join(distDir, distFile), html);
