@@ -64,11 +64,20 @@ pages.forEach(([srcFile, distFile]) => {
     return base64 || match;
   });
 
-  // Fix forward links: about.html -> ?page=about, privacy.html -> ?page=privacy, terms.html -> ?page=terms
-  html = html.replace(/href="(about|privacy|terms)\.html"/g, 'href="?page=$1"');
+  // GAS runs inside a sandboxed iframe — convert all internal <a href> to onclick JS navigation
+  // This is the ONLY reliable way to navigate in Google Apps Script web apps.
 
-  // Fix back links to home: index.html -> . (Apps Script root URL)
-  html = html.replace(/href="index\.html"/g, 'href="."');
+  // Forward links: about.html / privacy.html / terms.html -> JS navigation with ?page=X
+  html = html.replace(
+    /href="(about|privacy|terms)\.html"/g,
+    (_, page) => `href="#" onclick="window.top.location.href=window.top.location.href.split('?')[0]+'?page=${page}';return false;"`
+  );
+
+  // Back links: index.html -> JS navigation to root exec URL (strips any ?page= param)
+  html = html.replace(
+    /href="(index\.html|\.)"/g,
+    `href="#" onclick="window.top.location.href=window.top.location.href.split('?')[0];return false;"`
+  );
 
   fs.writeFileSync(path.join(distDir, distFile), html);
   console.log(`✓ Built ${distFile}`);
