@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    
+
     // Language Toggle Logic (Visual Only)
     const btnHi = document.getElementById('btn-hi');
     const btnEn = document.getElementById('btn-en');
@@ -103,14 +103,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const rect = card.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
-            
+
             // Subtle internal gradient shifting based on mouse
             card.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(255,255,255,0.3) 0%, transparent 80%)`;
         });
-        
+
         card.addEventListener('mouseleave', () => {
             // Reset to default css based on class
-            card.style.background = ''; 
+            card.style.background = '';
         });
     });
 
@@ -118,6 +118,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Maitri Chatbot Widget Toggle (global scope for onclick attribute)
 function toggleMaitriChat() {
-    var win = document.getElementById("maitri-chat-window");
-    win.style.display = (win.style.display === "none") ? "block" : "none";
+    const modal = document.getElementById("maitri-chat-modal");
+    if (modal) {
+        modal.classList.toggle('active');
+    }
 }

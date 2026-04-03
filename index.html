@@ -129,12 +129,15 @@
         <button id="maitri-toggle-btn" onclick="toggleMaitriChat()" style="width: 65px; height: 65px; border-radius: 50%; background: linear-gradient(135deg, #1a73e8, #0d47a1); color: white; border: none; font-size: 26px; font-weight: bold; cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.3); transition: 0.3s;">
             M
         </button>
+    </div>
 
-        <div id="maitri-chat-window" style="display: none; width: 360px; height: 550px; position: absolute; bottom: 80px; right: 0; border-radius: 15px; overflow: hidden; background: white; box-shadow: 0 10px 30px rgba(0,0,0,0.4); border: 1px solid #ddd;">
-            <iframe src="https://project-maitri.github.io/Gen-Z-ai-Chatbot/"
-                    style="width: 100%; height: 100%; border: none;"
-                    allow="microphone; camera">
-            </iframe>
+    <!-- Full Screen Chatbot Modal -->
+    <div id="maitri-chat-modal" class="chatbot-modal">
+        <button class="chatbot-close-btn" onclick="toggleMaitriChat()">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="chatbot-body">
+            <iframe src="https://project-maitri.github.io/Gen-Z-ai-Chatbot/" allow="microphone; camera"></iframe>
         </div>
     </div>
 
