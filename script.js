@@ -116,10 +116,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
+// 1. माइक्रोफ़ोन 'Wake-up' कोड
+async function startNardVoice() {
+  try {
+    // यह सीधे ब्राउज़र से अनुमति मांगता है (मूल पृष्ठ पर)
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    console.log("Microphone Access Granted on parent!");
+    // You don't necessarily have to stream here, merely asking for permission is usually enough 
+    // to give the nested iframe the necessary authorization.
+  } catch (err) {
+    console.error("Microphone Error: ", err);
+    // Optional alert as requested:
+    alert("कृपया ब्राउज़र की सेटिंग में जाकर माइक्रोफ़ोन को 'Allow' करें।");
+  }
+}
+
 // Maitri Chatbot Widget Toggle (global scope for onclick attribute)
 function toggleMaitriChat() {
     const modal = document.getElementById("maitri-chat-modal");
     if (modal) {
-        modal.classList.toggle('active');
+        const isActive = modal.classList.toggle('active');
+        if (isActive) {
+            // "जबरन अनुमति" (Force Permission) - Request mic from parent as soon as chat opens
+            startNardVoice();
+        }
     }
 }
