@@ -15,18 +15,6 @@
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    <script>
-      // पेज लोड होते ही माइक की अनुमति मांगें (GAS iframe override)
-      window.onload = function() {
-        navigator.mediaDevices.getUserMedia({ audio: true })
-          .then(function(stream) {
-            console.log('Nard को माइक मिल गया!');
-          })
-          .catch(function(err) {
-            console.log('माइक एरर: ' + err);
-          });
-      };
-    </script>
 </head>
 
 <body>
@@ -141,16 +129,6 @@
         <button id="maitri-toggle-btn" onclick="toggleMaitriChat()" style="width: 65px; height: 65px; border-radius: 50%; background: linear-gradient(135deg, #1a73e8, #0d47a1); color: white; border: none; font-size: 26px; font-weight: bold; cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.3); transition: 0.3s;">
             M
         </button>
-    </div>
-
-    <!-- Full Screen Chatbot Modal -->
-    <div id="maitri-chat-modal" class="chatbot-modal">
-        <button class="chatbot-close-btn" onclick="toggleMaitriChat()">
-            <i class="fa-solid fa-xmark"></i>
-        </button>
-        <div class="chatbot-body">
-            <iframe src="https://project-maitri.github.io/Gen-Z-ai-Chatbot/" allow="microphone *; camera *" crossorigin="anonymous"></iframe>
-        </div>
     </div>
 
     <!-- Overlay light burst effect (implied by image bottom right) -->
