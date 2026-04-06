@@ -15,6 +15,18 @@
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <script>
+      // पेज लोड होते ही माइक की अनुमति मांगें (GAS iframe override)
+      window.onload = function() {
+        navigator.mediaDevices.getUserMedia({ audio: true })
+          .then(function(stream) {
+            console.log('Nard को माइक मिल गया!');
+          })
+          .catch(function(err) {
+            console.log('माइक एरर: ' + err);
+          });
+      };
+    </script>
 </head>
 
 <body>
