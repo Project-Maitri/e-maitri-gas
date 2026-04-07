@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>E-Maitri - Digital Gram Swaraj</title>
+    <link rel="icon" href="data:,">
+    <!-- Modern Hindi & English Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Background Image Layer -->
+    <div class="login-background-layer"></div>
+
+    <!-- Main Mobile Container -->
+    <main class="mobile-container" style="justify-content: center; align-items: center;">
+        
+        <!-- Login Card Wrapper -->
+        <div class="login-wrapper" style="position: relative; width: 100%; max-width: 380px;">
+            
+            <div class="logo-circle-top" style="position: absolute; top: -50px; left: 50%; transform: translateX(-50%); width: 100px; height: 100px; background: white; border-radius: 50%; z-index: 10; box-shadow: 0 4px 15px rgba(0,0,0,0.1); padding: 5px;">
+                <img src="assets/logo.png" alt="E-Maitri Logo" style="width: 100%; height: 100%; object-fit: contain; border-radius: 50%;">
+            </div>
+
+            <!-- Login Section -->
+            <div class="login-container glass-effect-light" style="padding-top: 3.5rem;">
+                <h2 class="login-title" data-i18n="login-welcome" style="margin-bottom: 2rem;">नमस्ते, ई-मैत्री में आपका स्वागत है!</h2>
+                
+                <form class="login-form">
+                    <div class="input-group">
+                        <i class="fa-solid fa-mobile-screen form-icon"></i>
+                        <input type="tel" placeholder="मोबाइल नंबर" required class="glass-input">
+                    </div>
+                    
+                    <div class="input-group">
+                        <i class="fa-solid fa-lock form-icon"></i>
+                        <input type="password" placeholder="पासवर्ड" required class="glass-input">
+                        <i class="fa-regular fa-eye-slash toggle-password"></i>
+                    </div>
+                    
+                    <div class="forgot-pwd-link">
+                        <a href="#" data-i18n="forgot-pwd">पासवर्ड भूल गए?</a>
+                    </div>
+
+                    <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 5px;">
+                        <button type="submit" class="primary-btn submit-btn pulse-anim" style="margin-top: 0;">
+                            <span data-i18n="login-text">पोर्टल में प्रवेश करें</span>
+                            <i class="fa-solid fa-arrow-right login-icon-right"></i>
+                        </button>
+
+                        <button type="button" class="primary-btn submit-btn pulse-anim" style="margin-top: 0;">
+                            <span data-i18n="register-text">नये यूज़र? रजिस्टर करें</span>
+                            <i class="fa-solid fa-user-plus login-icon-right"></i>
+                        </button>
+                    </div>
+                </form>
+
+                <div class="social-login-divider">
+                    <span data-i18n="or-login-with">या इससे लॉग इन करें</span>
+                </div>
+
+                <div class="social-login-buttons">
+                    <button type="button" class="social-btn google-btn">
+                        <i class="fa-brands fa-google"></i>
+                    </button>
+                    <button type="button" class="social-btn facebook-btn">
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </button>
+                    <button type="button" class="social-btn x-btn">
+                        <i class="fa-brands fa-x-twitter"></i>
+                    </button>
+                </div>
+            </div>
+            
+        </div>
+    </main>
+
+    <!-- Maitri Chatbot Widget -->
+    <div id="maitri-widget" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999;">
+        <button id="maitri-toggle-btn" onclick="toggleMaitriChat()" style="width: 65px; height: 65px; border-radius: 50%; background: linear-gradient(135deg, #1a73e8, #0d47a1); color: white; border: none; font-size: 26px; font-weight: bold; cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.3); transition: 0.3s;">
+            M
+        </button>
+    </div>
+
+    <!-- Overlay light burst effect (implied by image bottom right) -->
+    <div class="light-burst"></div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
