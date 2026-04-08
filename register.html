@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>E-Maitri - रजिस्ट्रेशन | Registration</title>
+    <link rel="icon" href="data:,">
+    <!-- Modern Hindi & English Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Background Image Layer -->
+    <div class="login-background-layer"></div>
+
+    <!-- Main Mobile Container -->
+    <main class="mobile-container" style="justify-content: center; align-items: center;">
+        
+        <!-- Registration Card Wrapper -->
+        <div class="login-wrapper" style="position: relative; width: 100%; max-width: 380px;">
+            
+            <div class="logo-circle-top" style="position: absolute; top: -50px; left: 50%; transform: translateX(-50%); width: 100px; height: 100px; background: white; border-radius: 50%; z-index: 10; box-shadow: 0 4px 15px rgba(0,0,0,0.1); padding: 5px;">
+                <img src="assets/logo.png" alt="E-Maitri Logo" style="width: 100%; height: 100%; object-fit: contain; border-radius: 50%;">
+            </div>
+
+            <!-- Registration Section -->
+            <div class="login-container glass-effect-light" style="padding-top: 3.5rem;">
+                <h2 class="login-title" data-i18n="register-welcome" style="margin-bottom: 1.5rem;">नया खाता बनाएं</h2>
+                
+                <form class="login-form" id="register-form">
+                    <!-- Full Name -->
+                    <div class="input-group">
+                        <i class="fa-solid fa-user form-icon"></i>
+                        <input type="text" id="reg-name" placeholder="पूरा नाम" required class="glass-input" data-i18n-placeholder="reg-name-placeholder">
+                    </div>
+
+                    <!-- Mobile Number -->
+                    <div class="input-group">
+                        <i class="fa-solid fa-mobile-screen form-icon"></i>
+                        <input type="tel" id="reg-mobile" placeholder="मोबाइल नंबर" required class="glass-input" pattern="[0-9]{10}" maxlength="10" data-i18n-placeholder="reg-mobile-placeholder">
+                    </div>
+
+                    <!-- Email (Optional) -->
+                    <div class="input-group">
+                        <i class="fa-solid fa-envelope form-icon"></i>
+                        <input type="email" id="reg-email" placeholder="ईमेल (वैकल्पिक)" class="glass-input" data-i18n-placeholder="reg-email-placeholder">
+                    </div>
+
+                    <!-- Village/Ward -->
+                    <div class="input-group">
+                        <i class="fa-solid fa-location-dot form-icon"></i>
+                        <input type="text" id="reg-village" placeholder="गाँव / वार्ड" required class="glass-input" data-i18n-placeholder="reg-village-placeholder">
+                    </div>
+
+                    <!-- Password -->
+                    <div class="input-group">
+                        <i class="fa-solid fa-lock form-icon"></i>
+                        <input type="password" id="reg-password" placeholder="पासवर्ड बनाएं" required class="glass-input" minlength="6" data-i18n-placeholder="reg-password-placeholder">
+                        <i class="fa-regular fa-eye-slash toggle-password" data-target="reg-password"></i>
+                    </div>
+
+                    <!-- Confirm Password -->
+                    <div class="input-group">
+                        <i class="fa-solid fa-shield-halved form-icon"></i>
+                        <input type="password" id="reg-confirm-password" placeholder="पासवर्ड की पुष्टि करें" required class="glass-input" minlength="6" data-i18n-placeholder="reg-confirm-placeholder">
+                        <i class="fa-regular fa-eye-slash toggle-password" data-target="reg-confirm-password"></i>
+                    </div>
+
+                    <!-- Terms Agreement -->
+                    <div class="register-terms">
+                        <label class="terms-checkbox-label">
+                            <input type="checkbox" id="reg-terms" required>
+                            <span data-i18n="reg-terms-text">मैं <a href="terms.html">नियम व शर्तें</a> और <a href="privacy.html">गोपनीयता नीति</a> स्वीकार करता/करती हूँ</span>
+                        </label>
+                    </div>
+
+                    <!-- Register Button -->
+                    <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 5px;">
+                        <button type="submit" class="primary-btn submit-btn pulse-anim" id="register-submit-btn" style="margin-top: 0;">
+                            <span data-i18n="register-btn-text">रजिस्टर करें</span>
+                            <i class="fa-solid fa-user-plus login-icon-right"></i>
+                        </button>
+                    </div>
+                </form>
+
+                <div class="social-login-divider">
+                    <span data-i18n="already-have-account">पहले से खाता है?</span>
+                </div>
+
+                <div style="display: flex; justify-content: center;">
+                    <a href="login.html" class="register-login-link" data-i18n="go-to-login">
+                        <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                        लॉगिन करें
+                    </a>
+                </div>
+            </div>
+            
+        </div>
+    </main>
+
+    <!-- Maitri Chatbot Widget -->
+    <div id="maitri-widget" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999;">
+        <button id="maitri-toggle-btn" onclick="toggleMaitriChat()" style="width: 65px; height: 65px; border-radius: 50%; background: linear-gradient(135deg, #1a73e8, #0d47a1); color: white; border: none; font-size: 26px; font-weight: bold; cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.3); transition: 0.3s;">
+            M
+        </button>
+    </div>
+
+    <!-- Overlay light burst effect -->
+    <div class="light-burst"></div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

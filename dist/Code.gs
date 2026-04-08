@@ -4,7 +4,7 @@ function doGet(e) {
   const page = params.page || 'index';
 
   // Whitelist of allowed pages (must match filenames in dist without .html)
-  const allowedPages = ['index', 'about', 'privacy', 'terms'];
+  const allowedPages = ['index', 'about', 'privacy', 'terms', 'login', 'register'];
   const safePage = allowedPages.includes(page) ? page : 'index';
 
   return HtmlService.createHtmlOutputFromFile(safePage)

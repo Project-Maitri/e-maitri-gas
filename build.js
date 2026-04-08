@@ -23,6 +23,8 @@ const pages = [
   ['about.html',   'about.html'],
   ['privacy.html', 'privacy.html'],
   ['terms.html',   'terms.html'],
+  ['login.html',   'login.html'],
+  ['register.html', 'register.html'],
 ];
 
 // Function to get Base64 representation of an image
@@ -72,9 +74,9 @@ pages.forEach(([srcFile, distFile]) => {
   // JS window.top.location is BLOCKED (cross-origin: googleusercontent.com vs script.google.com)
   // Solution: use native <a href target="_top"> — browsers allow this even cross-origin.
 
-  // Forward links: about.html / privacy.html / terms.html -> full GAS URL with ?page=X
+  // Forward links: about.html / privacy.html / terms.html / login.html -> full GAS URL with ?page=X
   html = html.replace(
-    /href="(about|privacy|terms)\.html"/g,
+    /href="(about|privacy|terms|login|register)\.html"/g,
     (_, page) => `href="${GAS_BASE_URL}?page=${page}" target="_top"`
   );
 

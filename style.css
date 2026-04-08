@@ -857,6 +857,74 @@ body {
 }
 
 /* =========================================
+   Registration Page Styles
+   ========================================= */
+
+.register-terms {
+    text-align: left;
+    margin-top: 2px;
+}
+
+.terms-checkbox-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-family: var(--font-hindi);
+    font-size: 0.8rem;
+    color: var(--color-text-medium);
+    cursor: pointer;
+    line-height: 1.4;
+}
+
+.terms-checkbox-label input[type="checkbox"] {
+    accent-color: var(--color-green);
+    width: 16px;
+    height: 16px;
+    margin-top: 2px;
+    flex-shrink: 0;
+    cursor: pointer;
+}
+
+.terms-checkbox-label a {
+    color: var(--color-blue-dark);
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition-fast);
+}
+
+.terms-checkbox-label a:hover {
+    text-decoration: underline;
+    color: var(--color-teal);
+}
+
+.register-login-link {
+    font-family: var(--font-hindi);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-blue-dark);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 24px;
+    border-radius: 30px;
+    border: 2px solid var(--color-blue-dark);
+    background: transparent;
+    transition: var(--transition-medium);
+}
+
+.register-login-link:hover {
+    background: var(--color-blue-dark);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(30, 78, 99, 0.2);
+}
+
+.register-login-link i {
+    font-size: 0.9rem;
+}
+
+/* =========================================
    Animations
    ========================================= */
 
@@ -935,4 +1003,12 @@ body {
 
 .hover-lift:hover {
     transform: translateY(-3px);
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-8px); }
+    40% { transform: translateX(8px); }
+    60% { transform: translateX(-5px); }
+    80% { transform: translateX(5px); }
 }

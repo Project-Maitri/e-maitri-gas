@@ -36,7 +36,15 @@ document.addEventListener('DOMContentLoaded', () => {
             "terms-p2": "हम आपकी डेटा सुरक्षा को प्राथमिकता देते हैं और इसे लागू डिजिटल नियमों के अनुपालन में नियंत्रित किया जाता है।",
             "privacy-title": "गोपनीयता नीति",
             "privacy-u1": "हम आपके डेटा का उपयोग कैसे करते हैं",
-            "privacy-p1": "व्यक्तिगत डेटा केवल डिजिटल सेवाओं तक पहुँच प्रदान करने के लिए एकत्र किया जाता है और आपकी सहमति के बिना कभी साझा नहीं किया जाता है।"
+            "privacy-p1": "व्यक्तिगत डेटा केवल डिजिटल सेवाओं तक पहुँच प्रदान करने के लिए एकत्र किया जाता है और आपकी सहमति के बिना कभी साझा नहीं किया जाता है।",
+            "register-welcome": "नया खाता बनाएं",
+            "register-btn-text": "रजिस्टर करें",
+            "already-have-account": "पहले से खाता है?",
+            "go-to-login": "लॉगिन करें",
+            "register-text": "नये यूज़र? रजिस्टर करें",
+            "login-welcome": "नमस्ते, ई-मैत्री में आपका स्वागत है!",
+            "forgot-pwd": "पासवर्ड भूल गए?",
+            "or-login-with": "या इससे लॉग इन करें"
         },
         "en": {
             "brand-title": "E-Maitri",
@@ -69,7 +77,15 @@ document.addEventListener('DOMContentLoaded', () => {
             "terms-p2": "We prioritize your data security and it is handled in compliance with applicable digital regulations.",
             "privacy-title": "Privacy Policy",
             "privacy-u1": "How we use your data",
-            "privacy-p1": "Personal data is only collected to provide access to digital services and is never shared without your consent."
+            "privacy-p1": "Personal data is only collected to provide access to digital services and is never shared without your consent.",
+            "register-welcome": "Create New Account",
+            "register-btn-text": "Register",
+            "already-have-account": "Already have an account?",
+            "go-to-login": "Login",
+            "register-text": "New User? Register",
+            "login-welcome": "Welcome to E-Maitri!",
+            "forgot-pwd": "Forgot Password?",
+            "or-login-with": "Or login with"
         }
     };
 
@@ -113,6 +129,64 @@ document.addEventListener('DOMContentLoaded', () => {
             card.style.background = '';
         });
     });
+
+    // Toggle Password Visibility (works on login & register pages)
+    const toggleBtns = document.querySelectorAll('.toggle-password');
+    toggleBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const targetId = btn.getAttribute('data-target');
+            // Support both data-target and sibling input approaches
+            const input = targetId
+                ? document.getElementById(targetId)
+                : btn.parentElement.querySelector('input[type="password"], input[type="text"]');
+            if (!input) return;
+
+            if (input.type === 'password') {
+                input.type = 'text';
+                btn.classList.remove('fa-eye-slash');
+                btn.classList.add('fa-eye');
+            } else {
+                input.type = 'password';
+                btn.classList.remove('fa-eye');
+                btn.classList.add('fa-eye-slash');
+            }
+        });
+    });
+
+    // Registration Form Validation
+    const registerForm = document.getElementById('register-form');
+    if (registerForm) {
+        registerForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const password = document.getElementById('reg-password').value;
+            const confirmPassword = document.getElementById('reg-confirm-password').value;
+
+            if (password !== confirmPassword) {
+                // Shake the confirm-password field
+                const confirmGroup = document.getElementById('reg-confirm-password').parentElement;
+                confirmGroup.style.animation = 'shake 0.4s ease';
+                setTimeout(() => confirmGroup.style.animation = '', 400);
+                alert(document.documentElement.lang === 'hi'
+                    ? 'पासवर्ड मेल नहीं खा रहे हैं!'
+                    : 'Passwords do not match!');
+                return;
+            }
+
+            // Success feedback (placeholder — hook real backend here)
+            const btn = document.getElementById('register-submit-btn');
+            const originalHTML = btn.innerHTML;
+            btn.innerHTML = '<i class="fa-solid fa-check"></i> <span>' +
+                (document.documentElement.lang === 'hi' ? 'रजिस्ट्रेशन सफल!' : 'Registration Successful!') +
+                '</span>';
+            btn.style.background = 'linear-gradient(135deg, var(--color-green), var(--color-teal))';
+            btn.disabled = true;
+
+            setTimeout(() => {
+                window.location.href = 'login.html';
+            }, 1500);
+        });
+    }
 
 });
 
