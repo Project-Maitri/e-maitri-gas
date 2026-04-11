@@ -1,4 +1,54 @@
+// 1. नार्ड विंडो का ग्लोबल रेफरेंस (इसे पेज के टॉप पर रखें)
+let nardWindow = null;
+
+/**
+ * 2. नार्ड टैब को खोलने वाला फंक्शन
+ * इसे आपके फ्लोटिंग आइकॉन के 'onclick' इवेंट पर कॉल करना है।
+ */
+function openNardApp() {
+    // नार्ड (Chatbot) का यूआरएल
+    const nardUrl = "https://project-maitri.github.io/Gen-Z-ai-Chatbot/";
+    
+    // 'NardChat' नाम बहुत ज़रूरी है ताकि postMessage इसे पहचान सके
+    nardWindow = window.open(nardUrl, "NardChat");
+    
+    if (nardWindow) {
+        console.log("Nard टैब सफलतापूर्वक खुल गया है।");
+        // शुरुआती कॉन्टेक्स्ट भेजें
+        setTimeout(() => {
+            sendContextToNard("E-MAITRI", "पोर्टल से नार्ड ऐप खोला गया है।");
+        }, 2000);
+    } else {
+        alert("कृपया पॉप-अप ब्लॉकर को अनुमति दें ताकि Nard खुल सके।");
+    }
+}
+
+/**
+ * 3. नार्ड को 'कंटेक्स्ट' (डेटा) भेजने वाला मुख्य फंक्शन
+ * @param {string} section - पोर्टल का विभाग (e.g., 'बूथ प्रबंधन')
+ * @param {string} details - यूजर क्या देख रहा है (e.g., 'कार्यकर्ताओं की लिस्ट')
+ */
+function sendContextToNard(section, details) {
+    if (nardWindow && !nardWindow.closed) {
+        const payload = {
+            type: "CONTEXT_UPDATE",
+            page: section,
+            info: details
+        };
+        
+        // डेटा भेजना
+        nardWindow.postMessage(payload, "*"); 
+        console.log("Nard को अपडेट भेजा गया: ", section);
+    } else {
+        console.warn("Nard टैब खुला नहीं है या बंद हो चुका है।");
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+    
+    // Initial tracking for current page
+    const pageTitle = document.title || "E-MAITRI";
+    sendContextToNard(pageTitle, "यूजर ने पेज लोड किया है।");
 
     // Language Toggle Logic (Visual Only)
     const btnHi = document.getElementById('btn-hi');
@@ -91,12 +141,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function switchLanguage(lang) {
         if (lang === 'hi') {
-            btnHi.classList.add('active');
-            btnEn.classList.remove('active');
+            if (btnHi) btnHi.classList.add('active');
+            if (btnEn) btnEn.classList.remove('active');
             document.documentElement.lang = 'hi';
         } else {
-            btnEn.classList.add('active');
-            btnHi.classList.remove('active');
+            if (btnEn) btnEn.classList.add('active');
+            if (btnHi) btnHi.classList.remove('active');
             document.documentElement.lang = 'en';
         }
 
@@ -109,26 +159,36 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    btnHi.addEventListener('click', () => switchLanguage('hi'));
-    btnEn.addEventListener('click', () => switchLanguage('en'));
+    if (btnHi && btnEn) {
+        btnHi.addEventListener('click', () => switchLanguage('hi'));
+        btnEn.addEventListener('click', () => switchLanguage('en'));
+    }
 
     // Add glowing effect follows mouse (optional micro-interaction)
     const cards = document.querySelectorAll('.feature-card');
-    cards.forEach(card => {
-        card.addEventListener('mousemove', e => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
+    if (cards.length > 0) {
+        cards.forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
 
-            // Subtle internal gradient shifting based on mouse
-            card.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(255,255,255,0.3) 0%, transparent 80%)`;
-        });
+                // Subtle internal gradient shifting based on mouse
+                card.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(255,255,255,0.3) 0%, transparent 80%)`;
+            });
 
-        card.addEventListener('mouseleave', () => {
-            // Reset to default css based on class
-            card.style.background = '';
+            card.addEventListener('mouseleave', () => {
+                // Reset to default css based on class
+                card.style.background = '';
+            });
+            
+            // Context Awareness for Features
+            card.addEventListener('click', () => {
+                const title = card.querySelector('.feature-title').innerText;
+                sendContextToNard("फीचर सेक्शन", `यूजर ${title} देख रहा है।`);
+            });
         });
-    });
+    }
 
     // Toggle Password Visibility (works on login & register pages)
     const toggleBtns = document.querySelectorAll('.toggle-password');
@@ -158,6 +218,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (registerForm) {
         registerForm.addEventListener('submit', (e) => {
             e.preventDefault();
+            
+            sendContextToNard("रजिस्ट्रेशन", "यूजर साइन-अप करने की कोशिश कर रहा है।");
 
             const password = document.getElementById('reg-password').value;
             const confirmPassword = document.getElementById('reg-confirm-password').value;
@@ -173,26 +235,77 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            // Success feedback (placeholder — hook real backend here)
+            // --- SAVE TO GOOGLE SHEETS LOGIC ---
             const btn = document.getElementById('register-submit-btn');
             const originalHTML = btn.innerHTML;
-            btn.innerHTML = '<i class="fa-solid fa-check"></i> <span>' +
-                (document.documentElement.lang === 'hi' ? 'रजिस्ट्रेशन सफल!' : 'Registration Successful!') +
-                '</span>';
-            btn.style.background = 'linear-gradient(135deg, var(--color-green), var(--color-teal))';
+
+            // Show loading state
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Loading...';
             btn.disabled = true;
 
-            setTimeout(() => {
-                window.location.href = 'login.html';
-            }, 1500);
+            const payload = {
+                name: document.getElementById('reg-name').value,
+                mobile: document.getElementById('reg-mobile').value,
+                email: document.getElementById('reg-email').value,
+                village: document.getElementById('reg-village').value,
+                password: password
+            };
+
+            console.log('Sending payload:', payload);
+
+            // Use the globally defined GAS URL from build.js, or fallback to the current one for testing
+            const scriptUrl = (typeof GAS_BASE_URL !== 'undefined') 
+                ? GAS_BASE_URL 
+                : 'https://script.google.com/macros/s/AKfycbz50ZXhghVEfTZ1zKEmXKoqIaYOC7gAyiXUhhWpB_LfBAECpgxCTGjt9LSyXWgs2CIL/exec';
+
+            console.log('Attempting fetch to:', scriptUrl);
+
+            fetch(scriptUrl, {
+                method: 'POST',
+                mode: 'no-cors', // Needed for GAS Web Apps
+                cache: 'no-cache',
+                headers: { 'Content-Type': 'text/plain' }, // Using text/plain avoids CORS preflight
+                body: JSON.stringify(payload)
+            })
+                .then(response => {
+                    console.log('Fetch response received (Opaque):', response);
+                    sendContextToNard("रजिस्ट्रेशन", "सफलतापूर्वक रजिस्टर हो गया है।");
+                    // Success feedback
+                    btn.innerHTML = '<i class="fa-solid fa-check"></i> <span>' +
+                        (document.documentElement.lang === 'hi' ? 'रजिस्ट्रेशन सफल!' : 'Registration Successful!') +
+                        '</span>';
+                    btn.style.background = 'linear-gradient(135deg, var(--color-green), var(--color-teal))';
+
+                    setTimeout(() => {
+                        window.location.href = 'login.html';
+                    }, 1500);
+                })
+                .catch(err => {
+                    console.error('Error:', err);
+                    btn.innerHTML = originalHTML;
+                    btn.disabled = false;
+                    alert('Connection error. Please try again.');
+                });
+            // ------------------------------------
         });
     }
 
 });
 
-// Maitri Chatbot
+/**
+ * 4. ऑटो-ट्रैकिंग (Optional): जब यूजर टैब बदले तो नार्ड को पता चल जाए
+ */
+document.addEventListener("visibilitychange", function() {
+    if (document.visibilityState === 'visible') {
+        const pageTitle = document.title || "E-MAITRI";
+        sendContextToNard(pageTitle, "यूजर वापस मुख्य पोर्टल पर आ गया है।");
+    }
+});
+
+
+// Maitri Chatbot (Updated to use Nard Logic)
 function toggleMaitriChat() {
-    // Google Apps Script iframe policy blocks microphone access.
-    // Opening it in a new window/tab completely fixes the issue.
-    window.open("https://project-maitri.github.io/Gen-Z-ai-Chatbot/", "_blank");
+    // अगर नार्ड पहले से खुला है, तो उसे रिफ्रेश करने की बजाय बस फोकस कर सकते हैं (लेकिन browsers allow नहीं करते अक्सर)
+    // यहाँ हम user के निर्देशानुसार openNardApp का ही इस्तेमाल करेंगे।
+    openNardApp();
 }

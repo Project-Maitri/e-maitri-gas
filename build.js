@@ -58,10 +58,10 @@ pages.forEach(([srcFile, distFile]) => {
     `<style>\n${cssContent}\n</style>`
   );
 
-  // Inline script.js (only present in index.html, safe to run on all)
+  // Inline script.js
   html = html.replace(
     /<script\s+src="script\.js"><\/script>/g,
-    `<script>\n${jsContent}\n</script>`
+    `<script>\nconst GAS_BASE_URL = '${GAS_BASE_URL}';\n${jsContent}\n</script>`
   );
 
   // Replace asset image references with Base64 data
